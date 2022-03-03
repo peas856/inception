@@ -1,0 +1,29 @@
+https://kkim-blog.tistory.com/125?category=1203467
+https://epicarts.tistory.com/159
+      : TLSv1.2 또는 TLSv1.3만 포함된 Nginx를 구성하는 컨테이너
+      : Nginx 없이 Wordpress + php-fpm(설치 및 구성해야 됨)을 구성하는 컨테이너
+      : Nginx 없이 MariaDB만 포함하는 컨테이너
+      : Wordpress 데이터베이스가 포함된 볼륨
+      : Wordpress 웹 사이트 파일이 포함된 두 번째 볼륨
+      : 컨테이너 간의 연결을 설정하는 도커 네트워크
+
+      다음은 몇 가지 금지 된 해키 패치입니다 : tail -f, bash, sleep infinity, while true.
+
+- 당신의 워드프레스 데이터베이스는 두 개의 유저가 있어야 하며, 그 중 하나는 관리자입니다.
+     관리자의 이름에는 admin/Admin/administrator/Administrator 등이 포함될 수 없습니다.      
+     ex: admin, administrator, Administrator, admin-123, 등
+
+당신의 볼륨은 Docker를 사용하는 호스트 머신의 /home/login/data 폴더에서 사용할 수 있습니다. 물론 로그인을 당신의 것으로 바꿔야합니다.
+- 더 간단하게 하려면, 도메인 이름이 로컬 IP 주소를 가리키도록 구성해야 합니다.
+     이 도메인 이름은 [login.42.fr]이어야 합니다. 다시 말하지만, 당신의 로그인을 사용하세요.
+     만약 당신이 wil이라면 [wil.42.fr은 wil]의 웹 사이트를 가르키는 IP 주소로 리다이렉션 되어야 합니다.
+
+최신 태그는 금지되며, Dockerfile에 비밀번호가 없어야합니다.
+반드시 환경 변수를 사용해야 합니다. .env 파일을 사용하여 저장하는 것을 추천합니다.
+.env 파일은 srcs 디렉토리의 루트에 있어야합니다.
+NGINX 컨테이너는 TLSv1.2 또는 TLSv1.3 프로토콜을 사용하여,
+포트 443을 통해서만 인프라에 대한 유일한 진입 점이어야합니다.
+
+https://github.com/Hyunja27/42_inception/blob/master/srcs/requirements/wordpress/Dockerfile
+
+https://github.com/KKWANH/42inception
