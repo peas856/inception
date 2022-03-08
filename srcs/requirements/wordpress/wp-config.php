@@ -8,6 +8,7 @@ define( 'DB_HOST', getenv("DB") );
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 
+
 /**#@+
  * Authentication unique keys and salts.
  *

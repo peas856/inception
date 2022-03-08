@@ -1,19 +1,17 @@
 FROM debian:buster
 
-RUN apt-get update -y && \
-    apt-get upgrade -y && \ 
-    apt-get -y install \ 
-    php7.3 \ 
+RUN apt-get update -y && apt-get upgrade -y && apt-get -y install php7.3 \ 
     php-fpm \ 
     php-cli \ 
     wget \ 
     curl \ 
-    php-mysql \ 
+    php-mysql \
     php-mbstring \ 
     php-xml \ 
     sendmail \ 
-    vim\
-    mariadb-client
+    vim \
+    mariadb-client \
+    dumb-init
 
 RUN apt-get update -y && apt-get install -y wget && \
 	wget https://wordpress.org/wordpress-5.9.tar.gz && \ 
@@ -31,4 +29,5 @@ RUN echo  "listen = 0.0.0.0:9000" >> /etc/php/7.3/fpm/pool.d/www.conf; \
 RUN sed -i "s|;clear_env = no|clear_env = no|g" /etc/php/7.3/fpm/pool.d/www.conf
 EXPOSE 9000
 RUN 	mkdir -p /run/php/
-ENTRYPOINT ["php-fpm7.3", "-F"]
+CMD ["php-fpm7.3", "-F"]
+ENTRYPOINT [ "/usr/bin/dumb-init" ]
