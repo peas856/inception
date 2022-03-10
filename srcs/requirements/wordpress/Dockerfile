@@ -21,7 +21,7 @@ RUN mv /wordpress/* /var/www/html/
 
 RUN rm -rf /var/www/html/wp-config-sample.php
 COPY wp-config.php /var/www/html
-COPY .htaccess /var/www/html
+
 
 RUN chown -R www-data:www-data /var/www/html && \ 
     rm -r /wordpress-5.9.tar.gz

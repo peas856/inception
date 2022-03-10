@@ -7,6 +7,8 @@ define( 'DB_PASSWORD', getenv("DB_PW") );
 define( 'DB_HOST', getenv("DB") );
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
+define('WP_HOME','https://trhee.42.fr');
+
 
 
 /**#@+
