@@ -42,6 +42,9 @@ services:
       - 42_inception
     restart: always
     env_file: .env
+    environment: 
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
   wordpress:
     depends_on:
       - mariadb

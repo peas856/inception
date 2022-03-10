@@ -18,11 +18,13 @@ RUN apt-get update -y && apt-get install -y wget && \
     tar -xvf wordpress-5.9.tar.gz
 RUN mkdir -p var/www/html
 RUN mv /wordpress/* /var/www/html/ 
-RUN chown -R www-data:www-data /var/www/html && \ 
-    rm -r /wordpress-5.9.tar.gz
 
 RUN rm -rf /var/www/html/wp-config-sample.php
 COPY wp-config.php /var/www/html
+COPY .htaccess /var/www/html
+
+RUN chown -R www-data:www-data /var/www/html && \ 
+    rm -r /wordpress-5.9.tar.gz
 
 RUN echo  "listen = 0.0.0.0:9000" >> /etc/php/7.3/fpm/pool.d/www.conf; \
     sed -i -e "s|;daemonize = yes|daemonize = no|g" /etc/php/7.3/fpm/php-fpm.conf
